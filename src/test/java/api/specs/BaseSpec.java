@@ -1,12 +1,12 @@
-package specs;
+package api.specs;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
-import reqres_api_tests.TestBase;
+import tests.BaseTest;
 
 import static io.restassured.filter.log.LogDetail.ALL;
 
-public class BaseSpec extends TestBase {
+public class BaseSpec extends BaseTest {
 
     public static ResponseSpecification responseSpec(int statusCode) {
         return new ResponseSpecBuilder()

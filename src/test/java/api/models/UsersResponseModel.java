@@ -1,6 +1,5 @@
-package models;
+package api.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
@@ -19,12 +18,11 @@ public class UsersResponseModel {
     Support support;
 
     @Data
-    public static class UserDataModel { // This class won't inherit @JsonNaming annotation
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+    public static class UserDataModel {
         private Integer id;
         private String email;
-        @JsonProperty("first_name")
         private String firstName;
-        @JsonProperty("last_name")
         private String lastName;
         private String avatar;
     }

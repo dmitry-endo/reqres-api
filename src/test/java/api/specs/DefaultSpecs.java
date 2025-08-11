@@ -1,5 +1,6 @@
-package specs;
+package api.specs;
 
+import config.ProjectConfig;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -9,10 +10,12 @@ import static io.restassured.http.ContentType.JSON;
 
 public class DefaultSpecs extends BaseSpec {
 
+    private static final ProjectConfig projectConfig = new ProjectConfig();
+
     public static final RequestSpecification defaultRequestSpec = with()
             .filter(withCustomTemplates())
             .log().all()
-            .header("x-api-key", API_KEY)
+            .header("x-api-key", projectConfig.getApiKey())
             .contentType(JSON);
 
     public static final ResponseSpecification responseSpec200 = responseSpec(200);
