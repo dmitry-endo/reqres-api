@@ -1,7 +1,7 @@
 package tests;
 
 import api.users.UsersApi;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import api.models.UserResponseModel;
 import api.models.UsersResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -13,15 +13,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Tag("users_tests")
 @Owner("dmitry_endo")
+@Feature("Users Interactions")
 @DisplayName("Test for API users interactions")
 public class UsersTests extends BaseTest {
 
     String name = "helen";
     String job = "dancer";
     String userId = "2";
-    String usersPageNum = "2";
+    String usersListPageNum = "2";
 
     @Test
+    @Story("User CRUD")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check creating user")
     void createUserTest() {
         UserResponseModel response =
@@ -39,6 +42,8 @@ public class UsersTests extends BaseTest {
     }
 
     @Test
+    @Story("User CRUD")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check updating user with PUT method")
     void updateUserPutMethodTest() {
 
@@ -54,6 +59,8 @@ public class UsersTests extends BaseTest {
     }
 
     @Test
+    @Story("User CRUD")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check updating user with PATCH method")
     void updateUserPatchMethodTest() {
 
@@ -69,23 +76,29 @@ public class UsersTests extends BaseTest {
     }
 
     @Test
+    @Story("User CRUD")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check deleting user")
     void deleteUserTest() {
         step("Make request", () -> UsersApi.deleteUser(userId));
     }
 
     @Test
+    @Story("Users List")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Check data field array size in users list")
     void checkUsersDataSizeTest() {
         UsersResponseModel response =
                 step("Make API get users list request", () ->
-                        UsersApi.getUsersListByPage(usersPageNum));
+                        UsersApi.getUsersListByPage(usersListPageNum));
 
         step("Check response for data field size", () ->
                 assertThat(response.getData().size()).isEqualTo(6));
     }
 
     @Test
+    @Story("Users List")
+    @Severity(SeverityLevel.MINOR)
     @DisplayName("Check support field content in users list")
     void checkUsersSupportContentTest() {
         String supportUrl = "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral";
@@ -93,7 +106,7 @@ public class UsersTests extends BaseTest {
 
         UsersResponseModel response =
                 step("Make API get users list request", () ->
-                        UsersApi.getUsersListByPage(usersPageNum));
+                        UsersApi.getUsersListByPage(usersListPageNum));
 
         step("Check response for support field content", () -> {
             assertThat(response.getSupport().getUrl()).isEqualTo(supportUrl);

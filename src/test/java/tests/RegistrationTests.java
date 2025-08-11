@@ -1,7 +1,7 @@
 package tests;
 
 import api.auth.AuthApi;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import api.models.AuthResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,6 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Tag("registration_tests")
 @Owner("dmitry_endo")
+@Feature("Auth")
 @DisplayName("Test for API registration")
 public class RegistrationTests extends BaseTest {
 
@@ -21,6 +22,8 @@ public class RegistrationTests extends BaseTest {
     String token = "QpwL5tke4Pnpja7X4";
 
     @Test
+    @Story("Registration")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check successful registration")
     void successfulRegisterTest() {
 
@@ -36,6 +39,8 @@ public class RegistrationTests extends BaseTest {
     }
 
     @Test
+    @Story("Registration")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check unsuccessful registration with missing password")
     void missingPasswordRegisterTest() {
 
@@ -51,6 +56,8 @@ public class RegistrationTests extends BaseTest {
     }
 
     @Test
+    @Story("Registration")
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Check unsuccessful registration with missing email")
     void missingEmailRegisterTest() {
 
