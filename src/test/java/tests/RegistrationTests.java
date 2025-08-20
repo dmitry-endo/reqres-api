@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static api.ApiEndpoints.REGISTER_PATH;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static utils.TokenAssertions.assertValidToken;
+import static utils.ValidationsUtils.assertValidToken;
 
 @Tag("registration_tests")
 @Owner("dmitry_endo")

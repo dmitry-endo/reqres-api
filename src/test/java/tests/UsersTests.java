@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static utils.ValidationsUtils.assertValidIsoDateTime;
 
 @Tag("users_tests")
 @Owner("dmitry_endo")
@@ -34,8 +35,7 @@ public class UsersTests extends BaseTest {
         step("Проверяем ответ от сервера", () -> {
             assertThat(response.getId())
                     .as("У пользователя всегда должен присутствовать ID").isNotNull();
-            assertThat(response.getCreatedAt())
-                    .as("Дата создания не должна равняться null").isNotNull(); // fix date pattern check
+            assertValidIsoDateTime(response.getCreatedAt());
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
@@ -52,8 +52,7 @@ public class UsersTests extends BaseTest {
                         UsersApi.updateUserWithPut(name, job, userId));
 
         step("Проверяем ответ от сервера", () -> {
-            assertThat(response.getUpdatedAt())
-                    .as("Дата обновления не должна равняться null").isNotNull(); // fix date pattern check
+            assertValidIsoDateTime(response.getUpdatedAt());
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
@@ -70,8 +69,7 @@ public class UsersTests extends BaseTest {
                         UsersApi.updateUserWithPatch(name, job, userId));
 
         step("Проверяем ответ от сервера", () -> {
-            assertThat(response.getUpdatedAt())
-                    .as("Дата обновления не должна равняться null").isNotNull();
+            assertValidIsoDateTime(response.getUpdatedAt());
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
