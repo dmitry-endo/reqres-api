@@ -13,8 +13,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Tag("users_tests")
 @Owner("dmitry_endo")
-@Feature("Users Interactions")
-@DisplayName("Test for API users interactions")
+@Feature("Взаимодействие с пользователями")
+@DisplayName("Тесты на взаимодействие с пользователями")
 public class UsersTests extends BaseTest {
 
     String name = "helen";
@@ -23,92 +23,94 @@ public class UsersTests extends BaseTest {
     String usersListPageNum = "2";
 
     @Test
-    @Story("User CRUD")
+    @Story("CRUD операции")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check creating user")
+    @DisplayName("Проверка создания пользователя")
     void createUserTest() {
         UserResponseModel response =
-                step("Make API create user request", () ->
+                step("Выполняем API запрос на создание", () ->
                                 UsersApi.createUser(name, job));
 
-        step("Check create user response", () -> {
+        step("Проверяем ответ от сервера", () -> {
             assertThat(response.getId())
-                    .as("User ID must not be null").isNotNull();
+                    .as("У пользователя всегда должен присутствовать ID").isNotNull();
             assertThat(response.getCreatedAt())
-                    .as("Creation date must not be null").isNotNull();
+                    .as("Дата создания не должна равняться null").isNotNull();
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
     }
 
     @Test
-    @Story("User CRUD")
+    @Story("CRUD операции")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check updating user with PUT method")
+    @DisplayName("Проверка обновления записи пользователя методом PUT")
     void updateUserPutMethodTest() {
 
         UserResponseModel response =
-                step("Make API update user request with PUT", () ->
+                step("Выполняем API запрос методом PUT", () ->
                         UsersApi.updateUserWithPut(name, job, userId));
 
-        step("Check update user response", () -> {
-            assertThat(response.getUpdatedAt()).isNotNull();
+        step("Проверяем ответ от сервера", () -> {
+            assertThat(response.getUpdatedAt())
+                    .as("Дата обновления не должна равняться null").isNotNull();
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
     }
 
     @Test
-    @Story("User CRUD")
+    @Story("CRUD операции")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check updating user with PATCH method")
+    @DisplayName("Проверка обновления записи пользователя методом PATCH")
     void updateUserPatchMethodTest() {
 
         UserResponseModel response =
-                step("Make API update user request with PATCH", () ->
+                step("Выполняем API запрос методом PATCH", () ->
                         UsersApi.updateUserWithPatch(name, job, userId));
 
-        step("Check update user response", () -> {
-            assertThat(response.getUpdatedAt()).isNotNull();
+        step("Проверяем ответ от сервера", () -> {
+            assertThat(response.getUpdatedAt())
+                    .as("Дата обновления не должна равняться null").isNotNull();
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
     }
 
     @Test
-    @Story("User CRUD")
+    @Story("CRUD операции")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check deleting user")
+    @DisplayName("Проверка удаления пользователя")
     void deleteUserTest() {
-        step("Make request", () -> UsersApi.deleteUser(userId));
+        step("Выполняем API запрос на удаление", () -> UsersApi.deleteUser(userId));
     }
 
     @Test
-    @Story("Users List")
+    @Story("Список пользователей")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Check data field array size in users list")
+    @DisplayName("Проверка размера массива data в списке пользователей")
     void checkUsersDataSizeTest() {
         UsersResponseModel response =
-                step("Make API get users list request", () ->
+                step("Выполняем API запрос на получение списка пользователей", () ->
                         UsersApi.getUsersListByPage(usersListPageNum));
 
-        step("Check response for data field size", () ->
+        step("Проверяем размера массива data в ответе от сервера", () ->
                 assertThat(response.getData().size()).isEqualTo(6));
     }
 
     @Test
-    @Story("Users List")
+    @Story("Список пользователей")
     @Severity(SeverityLevel.MINOR)
-    @DisplayName("Check support field content in users list")
+    @DisplayName("Проверка содержимого массива support в списке пользователей")
     void checkUsersSupportContentTest() {
         String supportUrl = "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral";
         String supportText = "Tired of writing endless social media content? Let Content Caddy generate it for you.";
 
         UsersResponseModel response =
-                step("Make API get users list request", () ->
+                step("Выполняем API запрос на получение списка пользователей", () ->
                         UsersApi.getUsersListByPage(usersListPageNum));
 
-        step("Check response for support field content", () -> {
+        step("Проверяем содержимое массива support в ответе от сервера", () -> {
             assertThat(response.getSupport().getUrl()).isEqualTo(supportUrl);
             assertThat(response.getSupport().getText()).isEqualTo(supportText);
         });

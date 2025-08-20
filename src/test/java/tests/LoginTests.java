@@ -13,8 +13,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Tag("login_tests")
 @Owner("dmitry_endo")
-@Feature("Auth")
-@DisplayName("Test for API login")
+@Feature("Аутентификация")
+@DisplayName("Тесты API входа в профиль")
 public class LoginTests extends BaseTest {
 
     String email = "eve.holt@reqres.in";
@@ -22,50 +22,50 @@ public class LoginTests extends BaseTest {
     String token = "QpwL5tke4Pnpja7X4";
 
     @Test
-    @Story("Login")
+    @Story("Вход в профиль")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check successful login")
+    @DisplayName("Проверка успешного входа в профиль")
     void successfulLoginTest() {
 
         AuthResponseModel response =
-                step("Make API login request", () ->
+                step("Выполняем API запрос на вход", () ->
                         AuthApi.successfulAuth(email, password, LOGIN_PATH));
 
-        step("Check login response token", () -> {
-            assertThat(response.getToken()).isEqualTo(token);
+        step("Проверяем ответ от сервера на наличие валидного токена", () -> {
+            assertThat(response.getToken()).isEqualTo(token); // fix token check
         });
     }
 
     @Test
-    @Story("Login")
+    @Story("Вход в профиль")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check unsuccessful login with missing password")
+    @DisplayName("Проверка входа в профиль без пароля")
     void missingPasswordLoginTest() {
 
         AuthResponseModel response =
-                step("Make API login request", () ->
+                step("Выполняем API запрос на вход", () ->
                         AuthApi.unsuccessfulAuth(email, null, LOGIN_PATH));
 
-        step("Check login response error", () -> {
+        step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
             assertThat(response.getError())
-                    .as("There must be a password provided to login")
+                    .as("Для входа в профиль необходим пароль")
                     .isEqualTo("Missing password");
         });
     }
 
     @Test
-    @Story("Login")
+    @Story("Вход в профиль")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check unsuccessful login with missing email")
+    @DisplayName("Проверка входа в профиль без email'а")
     void missingEmailLoginTest() {
 
         AuthResponseModel response =
-                step("Make API login request", () ->
+                step("Выполняем API запрос на вход", () ->
                         AuthApi.unsuccessfulAuth(null, password, LOGIN_PATH));
 
-        step("Check login response error", () -> {
+        step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
             assertThat(response.getError())
-                    .as("There must be an email provided to login")
+                    .as("Для входа в профиль необходим email")
                     .isEqualTo("Missing email or username");
         });
     }

@@ -13,8 +13,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Tag("registration_tests")
 @Owner("dmitry_endo")
-@Feature("Auth")
-@DisplayName("Test for API registration")
+@Feature("Аутентификация")
+@DisplayName("Тесты API регистрации")
 public class RegistrationTests extends BaseTest {
 
     String email = "eve.holt@reqres.in";
@@ -22,52 +22,52 @@ public class RegistrationTests extends BaseTest {
     String token = "QpwL5tke4Pnpja7X4";
 
     @Test
-    @Story("Registration")
+    @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check successful registration")
+    @DisplayName("Проверка успешной регистрации")
     void successfulRegisterTest() {
 
         AuthResponseModel response =
-                step("Make API registration request", () ->
+                step("Выполняем API запрос на регистрацию", () ->
                         AuthApi.successfulAuth(email, password, REGISTER_PATH));
 
-        step("Check registration response token and ID", () -> {
-            assertThat(response.getToken()).isEqualTo(token);
+        step("Проверяем ответ от сервера на наличие валидного токена и ID", () -> {
+            assertThat(response.getToken()).isEqualTo(token); // fix token check
             assertThat(response.getId())
-                    .as("User ID must not be null").isNotNull();
+                    .as("У пользователя всегда должен присутствовать ID").isNotNull();
         });
     }
 
     @Test
-    @Story("Registration")
+    @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check unsuccessful registration with missing password")
+    @DisplayName("Проверка регистрации без пароля")
     void missingPasswordRegisterTest() {
 
         AuthResponseModel response =
-                step("Make API registration request", () ->
+                step("Выполняем API запрос на регистрацию", () ->
                         AuthApi.unsuccessfulAuth(email, null, REGISTER_PATH));
 
-        step("Check registration response error", () -> {
+        step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
             assertThat(response.getError())
-                    .as("There must be a password provided to registration")
+                    .as("Для регистрации необходим пароль")
                     .isEqualTo("Missing password");
         });
     }
 
     @Test
-    @Story("Registration")
+    @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Check unsuccessful registration with missing email")
+    @DisplayName("Проверка регистрации без email'а")
     void missingEmailRegisterTest() {
 
         AuthResponseModel response =
-                step("Make API registration request", () ->
+                step("Выполняем API запрос на регистрацию", () ->
                         AuthApi.unsuccessfulAuth(null, password, REGISTER_PATH));
 
-        step("Check registration response error", () -> {
+        step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
             assertThat(response.getError())
-                    .as("There must be an email provided to registration")
+                    .as("Для регистрации необходим email")
                     .isEqualTo("Missing email or username");
         });
     }
