@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static api.ApiEndpoints.REGISTER_PATH;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static utils.TokenAssertions.assertValidToken;
 
 @Tag("registration_tests")
 @Owner("dmitry_endo")
@@ -19,7 +20,6 @@ public class RegistrationTests extends BaseTest {
 
     String email = "eve.holt@reqres.in";
     String password = "cityslicka";
-    String token = "QpwL5tke4Pnpja7X4";
 
     @Test
     @Story("Регистрация")
@@ -32,7 +32,7 @@ public class RegistrationTests extends BaseTest {
                         AuthApi.successfulAuth(email, password, REGISTER_PATH));
 
         step("Проверяем ответ от сервера на наличие валидного токена и ID", () -> {
-            assertThat(response.getToken()).isEqualTo(token); // fix token check
+            assertValidToken(response.getToken());
             assertThat(response.getId())
                     .as("У пользователя всегда должен присутствовать ID").isNotNull();
         });

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static api.ApiEndpoints.LOGIN_PATH;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static utils.TokenAssertions.assertValidToken;
 
 @Tag("login_tests")
 @Owner("dmitry_endo")
@@ -19,7 +20,6 @@ public class LoginTests extends BaseTest {
 
     String email = "eve.holt@reqres.in";
     String password = "cityslicka";
-    String token = "QpwL5tke4Pnpja7X4";
 
     @Test
     @Story("Вход в профиль")
@@ -32,7 +32,7 @@ public class LoginTests extends BaseTest {
                         AuthApi.successfulAuth(email, password, LOGIN_PATH));
 
         step("Проверяем ответ от сервера на наличие валидного токена", () -> {
-            assertThat(response.getToken()).isEqualTo(token); // fix token check
+            assertValidToken(response.getToken());
         });
     }
 

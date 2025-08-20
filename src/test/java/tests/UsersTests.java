@@ -35,7 +35,7 @@ public class UsersTests extends BaseTest {
             assertThat(response.getId())
                     .as("У пользователя всегда должен присутствовать ID").isNotNull();
             assertThat(response.getCreatedAt())
-                    .as("Дата создания не должна равняться null").isNotNull();
+                    .as("Дата создания не должна равняться null").isNotNull(); // fix date pattern check
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
@@ -53,7 +53,7 @@ public class UsersTests extends BaseTest {
 
         step("Проверяем ответ от сервера", () -> {
             assertThat(response.getUpdatedAt())
-                    .as("Дата обновления не должна равняться null").isNotNull();
+                    .as("Дата обновления не должна равняться null").isNotNull(); // fix date pattern check
             assertThat(response.getName()).isEqualTo(name);
             assertThat(response.getJob()).isEqualTo(job);
         });
