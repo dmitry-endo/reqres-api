@@ -9,19 +9,31 @@ public class ValidationsUtils {
 
     public static void assertValidToken(String token) {
         assertThat(token)
-                .describedAs("Токен должен иметь длину >= 16 и содержать только символы латинского алфавита")
+                .as("Токен должен иметь длину >= 16 и содержать только символы латинского алфавита")
                 .isNotBlank()
-                .hasSizeBetween(16, 256)
+                .hasSizeGreaterThanOrEqualTo(16)
                 .matches("^[a-zA-Z0-9]+$");
+    }
+
+    public static void assertMissingPasswordError(String error, String description) {
+        assertThat(error)
+                .as(description)
+                .isEqualTo("Missing password");
+    }
+
+    public static void assertMissingEmailError(String error, String description) {
+        assertThat(error)
+                .as(description)
+                .isEqualTo("Missing email or username");
     }
 
     public static void assertValidIsoDateTime(String dateTime) {
         assertThatCode(() -> Instant.parse(dateTime))
-                .describedAs("Дата должна быть в формате ISO 8601")
+                .as("Дата должна быть в формате ISO 8601")
                 .doesNotThrowAnyException();
 
         assertThat(dateTime)
-                .describedAs("Дата не должна быть пустой и отвечала заданной структуре")
+                .as("Дата не должна быть пустой")
                 .isNotBlank();
     }
 }

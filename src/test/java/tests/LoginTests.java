@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static api.ApiEndpoints.LOGIN_PATH;
 import static io.qameta.allure.Allure.step;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static utils.ValidationsUtils.assertValidToken;
+import static utils.ValidationsUtils.*;
 
 @Tag("login_tests")
 @Owner("dmitry_endo")
@@ -47,9 +46,7 @@ public class LoginTests extends BaseTest {
                         AuthApi.unsuccessfulAuth(email, null, LOGIN_PATH));
 
         step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
-            assertThat(response.getError())
-                    .as("Для входа в профиль необходим пароль")
-                    .isEqualTo("Missing password");
+            assertMissingPasswordError(response.getError(), "Для входа в профиль необходим пароль");
         });
     }
 
@@ -64,9 +61,7 @@ public class LoginTests extends BaseTest {
                         AuthApi.unsuccessfulAuth(null, password, LOGIN_PATH));
 
         step("Проверяем ответ от сервера на наличие ожидаемой ошибки", () -> {
-            assertThat(response.getError())
-                    .as("Для входа в профиль необходим email")
-                    .isEqualTo("Missing email or username");
+            assertMissingEmailError(response.getError(), "Для входа в профиль необходим email");
         });
     }
 }
