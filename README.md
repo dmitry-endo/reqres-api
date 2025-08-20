@@ -68,8 +68,9 @@ ____
 ___
 ```bash  
 gradle clean test
+-DapiKey=YOUR_API_KEY
 ```
-
+where <code>YOUR_API_KEY</code> your ReqRes API key.
 
 ___
 <a id="allure"></a>
