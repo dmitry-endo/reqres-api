@@ -12,9 +12,7 @@ import static io.restassured.RestAssured.given;
 public class UsersApi extends DefaultSpecs {
 
     public static UserResponseModel createUser(String name, String job) {
-        UserRequestModel userData = new UserRequestModel();
-        userData.setName(name);
-        userData.setJob(job);
+        UserRequestModel userData = new UserRequestModel(name, job);
 
         return given(defaultRequestSpec)
                 .body(userData)
@@ -29,9 +27,7 @@ public class UsersApi extends DefaultSpecs {
     }
 
     public static UserResponseModel updateUserWithPut(String name, String job, String userId) {
-        UserRequestModel userData = new UserRequestModel();
-        userData.setName(name);
-        userData.setJob(job);
+        UserRequestModel userData = new UserRequestModel(name, job);
 
         return given(defaultRequestSpec)
                 .pathParam("id", userId)
@@ -47,9 +43,7 @@ public class UsersApi extends DefaultSpecs {
     }
 
     public static UserResponseModel updateUserWithPatch(String name, String job, String userId) {
-        UserRequestModel userData = new UserRequestModel();
-        userData.setName(name);
-        userData.setJob(job);
+        UserRequestModel userData = new UserRequestModel(name, job);
 
         return given(defaultRequestSpec)
                 .pathParam("id", userId)

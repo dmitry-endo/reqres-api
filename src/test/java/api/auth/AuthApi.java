@@ -9,9 +9,7 @@ import static io.restassured.RestAssured.given;
 public class AuthApi extends DefaultSpecs {
 
     public static AuthResponseModel successfulAuth(String email, String password, String endpointPath) {
-        AuthRequestModel authData = new AuthRequestModel();
-        authData.setEmail(email);
-        authData.setPassword(password);
+        AuthRequestModel authData = new AuthRequestModel(email, password);
 
         return given(defaultRequestSpec)
                 .body(authData)
@@ -26,9 +24,7 @@ public class AuthApi extends DefaultSpecs {
     }
 
     public static AuthResponseModel unsuccessfulAuth(String email, String password, String endpointPath) {
-        AuthRequestModel authData = new AuthRequestModel();
-        authData.setEmail(email);
-        authData.setPassword(password);
+        AuthRequestModel authData = new AuthRequestModel(email, password);
 
         return given(defaultRequestSpec)
                 .body(authData)

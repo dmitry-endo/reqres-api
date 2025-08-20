@@ -11,7 +11,6 @@ public class BaseTest {
 
     @BeforeAll
     static void baseConfigurationSetup() {
-
         ProjectConfig projectConfig = new ProjectConfig(apiConfig);
         projectConfig.setApiConfig();
     }

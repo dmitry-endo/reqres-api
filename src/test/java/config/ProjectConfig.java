@@ -11,7 +11,7 @@ public class ProjectConfig {
         this.apiConfig = apiConfig;
     }
 
-    public ProjectConfig() { // no-args constructor
+    public ProjectConfig() {
         this(ConfigFactory.create(ApiConfig.class, System.getProperties()));
     }
 
