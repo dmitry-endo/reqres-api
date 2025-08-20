@@ -12,17 +12,11 @@
 ____
 
 * <a href="#tools">Технологии и инструменты</a>
-
 * <a href="#cases">Примеры автоматизированных тест-кейсов</a>
-
 * <a href="#jenkins">Сборка в Jenkins</a>
-
 * <a href="#console">Команда для запуска из терминала</a>
-
 * <a href="#allure">Allure отчет</a>
-
 * <a href="#telegram">Уведомление в Telegram при помощи бота</a>
-
 * <a href="#integrations">Интеграция с Allure TestOps</a>
 
 
@@ -39,7 +33,7 @@ ____
 <a href="https://gradle.org/"><img src="media/logos/Gradle.svg" width="50" height="50"  alt="Gradle"/></a>  
 <a href="https://rest-assured.io/"><img src="media/logos/REST_Assured.png" width="50" height="50"  alt="REST Assured"/></a>  
 <a href="https://www.jenkins.io/"><img src="media/logos/Jenkins.svg" width="50" height="50"  alt="Jenkins"/></a>  
-<a href="ht[images](images)tps://github.com/allure-framework/allure2"><img src="media/logos/Allure.svg" width="50" height="50"  alt="Allure"/></a>
+<a href="https://github.com/allure-framework/allure2"><img src="media/logos/Allure.svg" width="50" height="50"  alt="Allure"/></a>
 <a href="https://qameta.io/"><img src="media/logos/Allure2.svg" width="50" height="50"  alt="Allure TestOps"/></a>
 </p>
 
